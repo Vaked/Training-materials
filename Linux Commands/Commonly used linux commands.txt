@@ -1,0 +1,261 @@
+Commonly used Linux commands
+Command
+Explanation
+Example
+
+ls
+List files in directory; current directory is used if no directory is supplied
+$ ls ~/Desktop
+
+cd
+Change the current working directory
+$ cd /home/centos/
+
+pwd
+Print the current working directory
+$ pwd
+/home/centos/
+
+cp
+Copy a file
+$ cp orig.txt copy.txt
+
+mv
+Move or rename a file
+$ mv a.txt
+Desktop/b.txt
+
+rm
+Delete a file
+$ rm file.txt
+
+mkdir
+Create a directory
+$ mkdir examples/
+
+rmdir
+Delete a directory (must be empty)
+$ rmdir examples/
+
+cat
+Print one or more files to STDOUT
+$ cat file.txt
+
+grep
+Search for text within a file or STDIN
+$ grep 10.10.1.1
+/var/log/apache/*
+
+file
+Identify the file type
+$ file image.jpg
+image.jpg: JPEG Image Data
+
+head
+Display the first 10 lines of a file (use "-n X" to display first X lines)
+$ head /etc/passwd
+$ head -n 5 /etc/passwd
+
+tail
+Display the last 10 lines of a file (use "-n x" to display first X lines)
+$ rm file.txt
+
+tail -F
+Display new data as it is appended to the end of a file (useful for watching logs)
+$ tail -F
+/var/log/messages
+
+less
+Display text from STDIN or a file one screen at a time
+$ less /etc/passwd
+$ cat file | less
+
+ps
+Display a list of running processes
+$ ps aux
+
+lsof
+Display a list of open files
+$ lsof
+
+netstat
+Display TCP & UDP connection info
+$ netstat -na
+
+ifconfig
+Display information about your network interfaces, such as your IP address
+$ ifconfig
+
+su
+Temporarily switch to a different user. Root is used if no username is specified
+$ su - [username]
+
+sort
+Sort the contents of a file or STDIN
+$ sort /etc/passwd
+
+uniq
+Remove duplicate lines from a sorted file or sorted STDIN
+$ uniq mylist.txt
+
+chmod
+Change the permissions (mode) of a file or directory
+$ chmod +w file.txt
+
+stat
+View detailed information about a file
+$ stat file.txt
+
+ping
+Send ICMP ECHO_REQUEST to a network host to test connectivity
+$ ping 10.1.1.1
+
+whoami
+Display the current username
+$ whoami
+
+passwd
+Change a user's password, or your own if no username is specified
+$ passwd [username]
+
+kill
+Terminate or send a signal to a running process by process ID(PID)
+$ kill 8573
+
+ln
+Create a hard or symbolic link to a file
+$ ln [file] [link]
+
+Bash Commands
+
+uname -a Show system and kernel
+
+mount Show mounted file system
+
+date show system date
+
+whoami Show your username
+
+man command Show manual for command
+
+Bash Shortcut
+
+Ctrl-c Stop current command
+
+Ctrl-z Sleep Program
+
+Ctrl-a Go to start of line
+
+Ctrl-e Go to end of line
+
+Ctrl-u Cut from start of line
+
+Ctrl-k Cut from end of line
+
+Directory Operations
+
+pwd Show current directory
+
+mkdir dir Make directory dir
+
+cd dir Change directory to dir
+
+cd .. Go up a directry
+
+ls List files
+
+Ls Option
+
+ls -a Show all(include hidden)
+
+ls -R Recursive list
+
+ls -r Reverse order
+
+ls -t Sort by last modified
+
+ls -S Sort by file size
+
+ls -l Long listing format
+
+Bash Variable
+
+env Show environement variable
+
+echo $NAME Output value of $NAME variable
+
+export $NAME= value Set $NAME to value
+
+$PATH Executable search path
+
+$HOME Home directory
+
+$SHELL Current shell
+
+Search File
+
+grep pattern file Search for pattern in file
+
+grep -i Case insensitive search
+
+find /dir -name name Find file starting with name in dir
+
+locate file Find file
+
+File Operation
+
+touch file1 Create file1
+
+cat file1 file2 Concatenate file1 & file2
+
+less file View and paginate file
+
+cp file1 file2 Copy file1 to file2
+
+mv file1 file2 Move file1 to file2
+
+rm file Remove file
+
+File Permission
+
+chmod xxx file Change mod file to xxx
+
+chmd -R xxx folder Recursivly chmod folder to xxx
+
+chown user:group file Change file owner to user and group to group
+
+I/O Redirection
+
+cmd > file Standard output of cmd to file
+
+cmd >> file Append standout to file
+
+cmd 2> file Error output of cmd to file
+
+cmd 1>&2 Stdout to same place as stderr
+
+cmd &> file Every output of cmd to file
+
+Process Managment
+
+ps Show snapshot of processes
+
+top Show real tie processing
+
+kill pid Kill process with pid
+
+killall name Kill all processus with names beginning name
+
+
+$ sudo service apache2 restart - restart apache service
+
+$ sudo service apache2 start - start apache serice
+
+$ sudo service apache2 status - apache status SysVInit
+
+
+$ sed -i 's/utf8mb4_unicode_520_ci/utf8mb4_unicode_ci/g' /home/ognyan.petrov/dltest_db.sql
+Find and replace in file
+
+$ chown -R ogi:ogi dir_name chmod 0665 filename
+

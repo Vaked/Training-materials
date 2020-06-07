@@ -1,0 +1,242 @@
+Какво е рефакториране:
+в математиката "Фактор" обикновено е да се намали нещо до основни градивни елементи и да не може да бъде факторизирано допълнително 
+в програмирането е дисциплиниран начин за реструкториране на кода. без да добавяме нови функции, 
+Да подобрим дизайна и качеството на съществуващ код без да променим крайния резултат, който бихме получили от дадения 
+код Под дизайн можем да разбираме, как са комбинирани класовете, как са извадени методите, кой клас с кой комуникира, 
+как и какво точно прави.
+Постъпков процес, който прави лошия код в добър, ако е възможно.
+
+Защо ни трябва рефакториране?
+
+Кода постоянно се променя и качеството му се понижава (освен ако не рефакторираме)
+Изискванията на клиентите често се променят. С тези промени идват различия в кода, които биха могли да направят кода доста
+ по-нечетим
+и труден за поддръжка.
+
+
+Кога да рефакторираме?
+
+- Когато се наложи да добавим функция като допълнителна функционалност.(Може да се наложи да рефакторираме, за да добавим или 
+  отделим нов клас, в който да добавим функцията)
+- Рефакторираме като част от процеса от премахване на бъговете (правилото на бой скаута! )
+- При ревю на чужд или собствен код
+- Проблематичен код, който се е наложило да напишем бързо заради крайни срокове, пишем кода, за да заработи и знаем, 
+  че в бъдеще ще се наложи да го оправим.
+
+- Тестовете гарантират, че рефакторирането няма да промени, държанието на кода и програмата 
+
+Главни принципи на рефакторирането и качествения код
+
+- Kiss - Keep it simple stupid
+- Dry - Don't repeat yourself
+- Make the code expressive
+- Reduce overall code (YAGNI)
+  - More code = more bugs
+  - Avoiv premature optimisation
+- Appropriate level of abstraction
+  - Hide implementation details (Encapsulation, interfaces)
+- Code should be SOLID
+
+Refactoring process
+
+Запазваме кода си : 
+ - commit, save, zip code
+Правим тестове за да сме сигурни че поведението на кода остава същото и след промените
+- 'юнит тестове
+
+Рефакторираме малко по малко
+- Проверяваме, тестваме, commit-ваме, продължаваме с рефакторирането
+- Дори и малките промени трябва да са добре обислени.
+
+Test, Test, Test commit
+
+- чести commit-вания със адекватни съобщения към тях, (а не къммит веднъж на 10 класа със съобщение big fix)
+- Ревю на кода
+ - Pair programming (частни уроци, за които ви плащат)
+
+- Туулове за рефакториране
+
+Rephactor, Scisr, PHP Rephactoring browser
+
+
+
+Code smells
+
+
+
+
+Code smells Bloaters
+Bloaters =Нещата са станали твърде дълги/големи
+
+Long method- малките методи винаги са по-лесни за именуване, разбиране и имат по-малко дублициран код
+Large class - Разваля Single responsibility principle и прави твърде много неща, този клас може да бъде разбит на повече класове 
+Primitive obsession - Прекалено много примитивни данни, които би било по-добре да бъдат изнесени в отделен клас, с енкапсулирана 
+валидация
+Long parameter list - izi
+Data clumps - Данни, информация, които винаги се използват заедно, обаче не са организирани заедно в кода, променливите 
+start и end да се превърнат в range object
+Combinatorial Explosion -  примера с пицата, един и същ тип данни, пица с шунка , пица с шунка и кайма, 
+пица с шунка кайма и кашкавал и т.н. нови класове ползват се патърни да се избегне
+Class doesnt do much - прехаваме или смесваме с друг клас
+
+
+
+
+Object oriented abusers - случаи в които решението не използва напълно възножностите на обектно ориентираното програмиране
+
+Switch statements - Може да бъде заменен със полиморфизъм, да се използва само на места където всичко
+е константно и няма да бъде разширявано
+Temporary field - 
+
+Class depends on subclass - когато базовия клас зависи от наследника си, това е грешно трябва да се ползва лисков
+
+Alternate classes with different interfaces-  Два класа с индентични функции, но с различни имена на методите
+
+
+
+
+Change preventers - Нещо което пречи на промени или екстендване на софтуера
+
+Divergent change- Клас който е променян по много причини по много начини,
+violates SRP, solution is extra class
+
+Shotgun surgery - Правенето на малки модификации по един клас изисква да се правят промение по много други класове
+и функции, това става трудно за намиране и лесно за пропускане
+
+Parallel inheritance hierarchies -
+
+Inconsistent abstraction level  
+Intellingent children pattern
+
+Conditional complexity:
+Дълбоко нестване на ифове и фор цикли
+
+
+
+Dispensables - Нещо ненужно, което трябва да се премахне от кода
+
+Lazy class - Клас който не върши чак толкова, че да си срува неговото съществуване
+Всеки клас коства нещо, от към разбиране и поддръжка, ако не е нужен, трябв да се премахне
+
+Data class - Класове само с полета и свойства, 
+
+Duplicated code- методи Dry, extract method class pull up method.....
+
+Dead code - няма нужда от обяснение, стар ненужен код
+
+speculative generality
+
+
+
+Couplers - капълващи миризми
+
+Feature envy - метод, който повече се интересува от другклас вместо от собствения
+ в който се намира
+
+Innapropriate intimacy- добрите класове трябва да знаят възможно по-малко за другите класове
+
+Indecent exposure - Класове или техни фунцкии или пропъртита които са публични но не трябва да са
+Нарушава енкапсулацията
+
+middle man - за да достъпим нещо, минаваме през един или два допълнителни класа, за да имаме достъп до втория или третия
+трябва да премахнем междиня/те класове
+
+
+Data level refactorings
+
+((Replace data value with object))
+
+With replacement of a data value with an object, we have a primitive field (number, string, etc.)
+ that’s no longer so simple due to growth of the program and now has associated data and behaviors.
+ On the one hand, there’s nothing scary about these fields in and of themselves. However, this
+ fields-and-behaviors family can be present in several classes simultaneously, creating duplicate code.
+
+
+((Replace array with object )))
+Arrays are an excellent tool for storing data and collections of a single type. But if you use an array like post 
+office boxes, storing the username in box 1 and the user’s address in box 14, you will someday be very unhappy that
+ you did. This approach leads to catastrophic failures when somebody puts something in the wrong “box” and also requires
+ your time for figuring out which data is stored where.
+
+((Decompose conditional))
+
+The longer a piece of code is, the harder it’s to understand. Things become even more hard to understand when the 
+code is filled with conditions:
+
+While you’re busy figuring out what the code in the then block does, you forget what the relevant condition was.
+
+While you’re busy parsing else, you forget what the code in then does.
+
+((Replace Method with method object)) 
+
+A method is too long and you can’t separate it due to tangled masses of local variables that are hard to isolate from each 
+other.
+
+The first step is to isolate the entire method into a separate class and turn its local variables into fields of the class.
+
+Firstly, this allows isolating the problem at the class level. Secondly, it paves the way for splitting a large and unwieldy
+method into smaller ones that wouldn’t fit with the purpose of the original class anyway.
+
+((Substitute Algorithm))
+
+Sometimes a method is so cluttered with issues that it’s easier to tear down the method and start fresh. And perhaps
+you have found an algorithm that’s much simpler and more efficient. If this is the case, you should simply replace the
+old algorithm with the new one.
+
+
+
+
+Refactoring patterns
+
+Large repeating code fragments => extract repeating code in sepatere method/s
+
+Large methods => split them logically
+
+Large loop body or deep nesting => Extract method
+
+Class or method has weak cohesion => split into several classes / methods
+
+Single change carry out changes in several classes => redesign to loose coupling
+
+Related data are always used together but are not part of a single class => group
+them in a class
+
+A method has too many parameters => create a class to group parameters together
+
+A method calls more methods from another class than from its own class => move it 
+
+Two classes are tightly coupled => merge them or redesign them to separate their 
+responsibilities
+
+Public non-constant fields => MAKE THEM PRIVATE!!! 
+
+Magic numbers in the code => consider extracting constants
+
+Bad named class / method / varialbe => rename it
+
+Complex boolean condition => split it to several expression or method calls
+
+Complex expression => split into fewer simpler parts
+
+A set of constants is used as enumeration => convert to enumeration
+
+Method logic is too complex and is hard to understand => extrtact several more 
+more simple methods or even create a new class
+
+Unused classes, methods, parameters, variables => remove them
+
+Large data is passed by value without a good reason => pass it by refference
+
+Few ckasses share repeating functionality => extract base class and reuse the common code
+
+Different classes need to be instantiated depending on configuration settings => factory
+
+Badly formatted code => reformat it
+
+Too many classes in a single namespace => split classes loggically into new namespaces
+
+Unused using definitions => remove them
+
+Non-descriptive error messages => improve them
+
+

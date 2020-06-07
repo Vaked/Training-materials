@@ -1,0 +1,192 @@
+# Section 1 Introduce presentation
+
+# Section 2 What is clean code?
+
+ We will discuss the importance of clean code
+ 
+ • Clean code is simple : (not in an algorithmic or system- level, but in implementation)
+ • Clean code is readable : naming convetions, spacing, formatting, structure and flow in a program should be 
+	designed with the reader in mind, code is written for machines, but is read by people
+ • Clean code is SOLID: Following the SOLID Principles is one way to ensure that code is flexible, maintainable and long lasting
+ • Clean code is refactored : Refactor code whenever possible, (Boy scout rule) !!!!
+ • Clean code is tested : Writing clean code means writing tested code, code might break down the line, with unexpected bugs.
+	Testing code is also a way of futureprufing the code, as changes might be added to it, tests add a ready made system to 
+	confirm everything is working.
+ 
+ • What it is
+ • Identifying clean vs dirty
+ • Making it clean
+ • Keeping it clean
+ • Cleaning up after others 
+ • Quality over quantity
+
+# Section 3 WTF's per minute
+
+ • 80% of software lifecycle is maintenance
+ • We spend more time reading and looking at code then writing it
+ • Bad code can bring a company down, beware of spaghetti code and code smells!
+ • Easy to understand the structure
+ • Easy to udnerstand the logic
+ • Reasons for the decisiouns are documented
+ 
+ # Section 4 Beck's rules of software
+ 
+ • The most important rule is the Passes the tests one. If that one fails, you should not continue with the rest!!!
+ • Reveals intention could be understood as code should be easy to undertand! Programs are there to be read by people!
+ • No duplication or (DRY !) reuse code, use functions, and classes properly
+ • Fewest elements - anything that doesnt serve the three other rules must be removed
+ 
+ # Section 6 Naming conventions 
+ 
+ • Classes should be nouns and start with UpperCamelCase
+ • Methods/Functions should be verbs 
+ • The name of a boolean should give the anwser yes or not
+ • Consistent naming ( avoid synonims)
+
+ # Section 7 Naming examples	
+ • Replace magic numbers with named constants 
+ 
+ # Section 10 Functions intro
+
+ # Section 11 Function conventions
+ 
+ • Single responsibility , if a method does more than one thing that is bad cohesion 
+ • Strong cohesion is used in engineering, any pc component solves a single task, hard disk - storage
+ • Functions use the DRY principle 
+ • Functions should do one thing well, and one thing only!
+ • They should be SMALL!!!
+ • Avoid more than 4 parameters
+ • Never use GO-TO
+ • Avoid output parameters
+ • Don't return null
+ • Don't make GOD functions, refactor
+ • No boolean Params
+ • No boolean params
+ • Put the most important parameters first 
+ • Avoid magic strings and numbers
+ 
+ # Class conventions
+ 
+ • OOP Principles should be utilized to have propper class structure
+ • Classes should be small, and utilize Single responsibility principle
+ • Cohesion, Coupling, inheritance, polymorphism
+ • Cohesion measures how  ( колко общо имат помежду си пропъртитата и методите в класа)
+ • MATH CLASS HAS STRONG COHESION!!!! AS everything there is connected to Mathematic operations and nothing else
+	System.Mathematic
+		• Sin(), Cos(), Asin()
+		• Sqrt(), Pow(),Exp()
+		• Math.PI, Math.E
+ • Coupling is how tight everything is stuck together in a system, the looser the better, design patterns help for this.
+ • As the tighter the coupling, the more difficult it gets later on to do changes ,
+ • Orthogonality - operations change just one thing without affecting others
+ • PC has loose coupling Laptops have very tight coupling as everything is integrated in one board
+ 
+ # Class examples
+ 
+ # Encapsulation example and simple explanation:
+ 
+ • Encapsulation hides the implementation details
+ • All data members (fields) of a class should be hidden
+	• Accessed via properties (read-only and read-write)
+• No interface members should be hidden
+
+ # Abstraction and interface example :
+ 
+ Listing 6 shows and example that loads the person object form a database .
+ It takes the person's name and returns the Person object in the databaes that mathces.
+ The code is fine until something changes in the environment. For example
+ loading Person from the databaes may be fine for the first version, but for the next version 
+ you may need to add the ability to load a Person form a web service,
+ 
+ In Listing 7, the createProvider() method simply takes a $type. If the $type is set to database, the factory returns an instance
+ of DBPersonProvider. Any new implementation for loading people from a store does not require any changes in the class that uses
+ the factory and interface. The DBPersonProvider implements the PersonProvider interface and has the actual implementation of the
+ getPerson() method in it.
+ 
+ # Formatting 
+ 
+ Formatting is important !!!! Too important to ignore 
+ 
+ *Vertical formatting*
+ 
+ Team and project rules are more important than personal prefferance, the team rules!
+ Editing the config file, for a editor in the team is a very good practice, Good software is composed of a set of documents that read nicely.
+ They need to have a consistend sand smooth style
+ the reader needs to be able to trust that the formatting gestures he or she has seen will mean the same thing in others.
+ 
+ Indentation is also a important part of programming,
+ 
+ • Documentation and comments section	
+ • The best software documentation is the source code itself - keep it clean and readable
+ • Self-documenting code is code that is self explainable and does not need comments
+ • The best documentation is the code itself
+ • Make the code self explainable and self-documenting, easy to read and understand.
+
+  Good formatting goals :
+  To improve code readability
+  To improve code maintainability
+  Fundamental principle of code formatting
+  The formatting of the source code should disclose its logical structure
+  Large organizations follow strict conventions
+  Code conventions can vary in different teams
+  Use automated tools and take advantage of your IDE or text editor 
+  Eclipse – CheckStyle - php
+  VsCode – Inteliphense extension –php
+  JSHunt, JSLint – JavScript code analysis
+
+ • Documentation summary No over-documenting; the code should be self-explanatory, The project should have a good documentation and guides,
+ but it should be minimal in the source code
+ • Do not document bad code, rewrite it!
+ • "The best comment is the one you don't have to write"
+ • The best documentation is the code itself 
+ • Make the code self-explainable and self-documenting, easy to read and understand
+ • Do not comment bad code, rewrite it
+ • Effective comments do not reapeat the code
+ • They explain it at a higher level and reveal non-obvious details
+ 
+ • The cost of commenting
+ 
+ • Comments need maintenance, when refactoring code you have to refactor comments as well
+ • Writing comments promotes developers from writing cleaner, more explanatory code
+ 
+ # Unit testing section
+ 
+ • Arrange all necessary preconditions and inputs
+ • Act on the object or method under test
+ • Assert that the expected results have occured
+ 
+• Benefits:
+    • Clearly separates what is being tested from the setup and verification steps.
+	• Clarifies and focuses attention on a historically successful and generally necessary set of test steps.
+	• Makes some TestSmells more obvious:
+	• Assertions intermixed with "Act" code.
+	• Test methods that try to test too many different things at once.
+	
+• One assert per test is advised and is a good guideline, but one should not be affraid to put more than one assert in a test.
+	Testing a single concept per test function is more important. Avoiding long test functions that test everything, like a god class , and function
+	should be avoided
+ 
+ • F.I.R.S.T.
+	• Fast - Tests should execute extremelly fast(milliseconds) as you may have thousands of them in a big system 
+	• Independent - Arrange, Act, Assert
+	• Repeatable - Should give the same result every time when they run. Each test should setup its own data and not depend on other tests !!!!!!
+	• Self-validating - No manual inspection required to check whether the test has passed or failed.
+	• Timely(Thorough) - Test for exceptions, errors , bad inputs, large values and overflow, security, corner cases, 
+
+
+IF YOU LET THE TESTS ROT, YOUR CODE WILL ROT TOO
+ 
+ 
+#1: You're responsible for code quality.
+#2: Use meaningful names.
+#3: Write code that expresses intent.
+#4: Code should speak for itself. Less comments = less maintenance.
+#5: Leave the code better than you found it.
+#6: Single-responsibility code.
+i.e function does 1 thing well. Less arguments = better function.
+classes: most methods use most of the class' properties.
+#7: Tests (TDD).
+#8: Work on big picture skeleton, then fill in the details later 
+(interface first, implementation later).
+#9: Independent components that can be used in different places.
+#10: Master your craft.

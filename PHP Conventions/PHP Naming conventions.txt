@@ -1,0 +1,6 @@
+File and class - PascalCase
+function and varaibles - camelCase
+folders - snake_case or small-letters-with-dashes
+Field names in forms - snake_case
+css classes - should-be-with-dashes
+javascript id's - camelCase

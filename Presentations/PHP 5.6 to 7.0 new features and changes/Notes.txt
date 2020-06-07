@@ -1,0 +1,113 @@
+PHP 7 Е голяма крачка в света на php програмистите, като добавя много нови features и 
+performance upgrades. Release = December 2015
+
+- Up to twice as fast
+- reduced memory usage
+- Consistent 64 bit support
+- Fatal errors can be caught with exceptions, thus not terminating the script
+- Anonymous classes
+- Escape unicode characters
+
+Къде е PHP 6?
+PHP 6 е провален проект, искали са да добавят Unicode support към core-a на php.
+Но амбициозния план, е създал по-голям проблем, от очакваното в началото.В последствие
+поради, други проблеми и забавяне на development time. Проекта е бил прекратен.
+За да се избегне объркване, директно са прескочили php 6 и са минали на PHP7.
+PHP 6 = php 5 + unicode
+
+Ever since php 4 it was powered by the ZEND ending, php 5 used ZEND 2. PHP 7 uses
+PHPNG - PHP Next generation. It offers almost 100% speed increase and optimised memory usage
+allowing for less servers to handle the same ammount of users.
+
+PHP Source code in php 7 undergoes three processes:
+
+Tokenising(lexing) source code text like function
+The tokeniser also ataches metadata to each token, foobar is an identifie, function is a keyword, 
+and it replaces escape sequences within string literals.
+
+Parser
+Parsing: PHP looks through the tokens one-by-one and matches patterns that form different structures 
+in the language, and a "syntax tree" is built recursively. For example, a function declaration can be 
+recognised by a function keyword, a name, an opening bracket, a list of parameters, a closing bracket,
+ an opening curly brace, a list of statements, and a closing curly brace. Similarly, a list of
+ parameters is an optional type declaration, a variable name, and optionally a comma followed by 
+another list of parameters. And so on. So in our example, 1 + $a is recognised to be a binary add 
+operation with the operands 1 and $a. That operation is recognised to be the operand taken by the
+ return statement. That return statement is recognised to be the single statement in the statement 
+block that is the function body. int $a is recognised to be a parameter declaration of a variable 
+with the name $a and type int, within the parameter list.
+
+Compilation: The abstract syntax tree is transformed into a linear list of opcodes which are what the VM 
+actually runs. They're very simple instructions which can be executed in order. The opcodes making up 
+the function would look like this in PHP 5 (this is a text representation, not the actual C structures):
+
+The first opcode, RECV, receives the first argument passed to the function and stores it in !0 
+(which represents $a). The second opcode, ADD, adds 1 to the contents of $a and stores it in ~0 
+(a temporary variable which holds results before they can go into actual variables). Then, 
+RETURN makes the function return what's in ~0. There's an extra RETURN because PHP always adds
+ an implicit return null; at the end of the function.
+
+PHP5 Merges process 2 and 3 which are parsing and compilation in one
+
+Well, in PHP 5, there was no abstract syntax tree. Steps two and three were combined: PHP would 
+immediately emit (add to the list) opcodes after recognising some feature in the list of tokens.
+ That caused problems when we didn't have enough information, just from looking at the preceding 
+tokens, to know what operations to emit, and lead to a lot of hacks in place just to get this to work.
+ It meant, for instance, that we couldn't implement Python-style list comprehensions with
+ [$foo * 2 foreach($foos as $foo)] syntax because, for that to work, we need to emit the opcodes for
+ the beginning of a foreach(...) { loop before we emit the opcodes for 
+$foo * 2 (you can't use $foo if it's not been set yet), but this wasn't something possible in the 
+old parser. Now, though, we can analyse and compile the result in whatever order we like, we're
+ not bound by the order things come in.
+
+There were a bunch of tricks used to deal with it. Sometimes we'd maintain state somewhere and then 
+only emit opcodes at the end of a structure. list() did this, for instance. In a sense, it had
+ an AST which was built up when it was parsed and then immediately thrown away.
+
+
+PHPNG Uses abstract syntax tree, before sorting its opcodes, which gives the us 
+this performance increase.PHPNG With drupal is even quicker than facebook's HVVM in certain
+cases.HVVM uses JIT compiler , compiling php into native machine code , it serves as an 
+execution engine for PHP, it was highly popular before php 7.
+PHPNG also uses is not JIT at this moment, but will be at PHP8.
+A software diet was introduced, as there were "cache misses" during operation, and the JIT 
+compiler could not be set free. So the team made a crunch on da data structures used by
+the language.
+
+JIT is being implemented as an almost independent part of OPcache, an extension to cache the 
+opcodes so that compilation happens only when it is required. In PHP, JIT will treat the instructions 
+generated for the Zend VM as the intermediate representation. It will then generate an architecture 
+dependent machine code so that the host of your code is no longer the Zend VM, but the CPU directly.
+
+Scalar expeted types in function and class parameters
+
+Return types:
+PHP 7 Allows programers to declare the retyrn type of a function as per expected return 
+value= bool , int , float , string
+
+PHP 7 adds support for return type declarations.
+ 
+Similarly to argument type declarations, return type declarations specify
+ the type of the value that will be returned from a function. 
+The same types are available for 
+return type declarations as are available for argument type declarations.
+
+Error handling many fatal and recoverable fatal errors have been converted 
+to exceptions in php7. These error exceptions inherit from the error class
+which itself implements the Throwable interface( all exceptions inherit this base interface)
+Running out of memory error can still stop the script, Errors such as calling an
+nonexistent method will not terminate the script, instead they throw and exception
+that can be handled by a try catch block. This is good for some applications as a fatal 
+error would require them to be restarted. PHPUnit tests are also more usable
+as fatal errors drop the whole test suite.
+
+anonymous classes are useful when simple one off non reusable objects need to be created
+
+Asynchronous programming support
+
+With previous php5 versions it was difficult to simultaneously run differenc activities.
+PHP7 Has resolved this problem as it allows execution of a variety of tasks. One can do
+access to the database, networking, set timers and perform several I/O operations at the
+same time and without any interruption. The new version supports multi-threading environment
+making it suitable to handle simultaneous requests from the server.
+
